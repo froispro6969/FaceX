@@ -1,0 +1,70 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+body {
+  background-color: black;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 5px;
+  font-size: 1.4rem; 
+  color: white;
+}
+
+.navbar-logo {
+  font-size: 50px;
+  font-weight: 800;
+  user-select: none;
+}
+
+.navbar-link, .navbar-sign{
+  display: flex;
+  list-style-type: none;
+  gap: 30px;
+  text-decoration: none;
+  color: white;
+}
+
+.navbar-link > *, .navbar-sign > *{
+  color: white;
+  text-decoration: none;
+  position: relative;
+}
+
+.navbar-link > *:after, .navbar-sign > *:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: '.';
+  color: transparent;
+  background: white;
+  height: 1px;
+  transition: all .2s;
+}
+
+.navbar-link > *:hover:after, .navbar-sign > *:hover:after {
+  width: 100%;
+}
+
+
+
+
+
+
+
+
