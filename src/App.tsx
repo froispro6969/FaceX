@@ -1,6 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Navbar } from './components/Navbar'
-import './App.css'
+import './styles/App.css'
+import './styles/Navbar.css'
+import './styles/Register.css'
+import { Register } from './pages/Register'
 
 function App() {
 
@@ -10,7 +13,7 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route   />
+          <Route path="/register" element={<Register />}/>
         </Routes>
       </Router>
     </div>
