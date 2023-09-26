@@ -22,7 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-src/config/firebase-config.js
+src/config/firebase-config.ts
 src/config/babel.config.js
 src/config/babel-plugin-macros.config.js
-src/config/Firebase-config.ts
+

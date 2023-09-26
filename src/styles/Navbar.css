@@ -44,4 +44,8 @@ nav {
   .navbar-link > *:hover:after, .navbar-sign > *:hover:after {
     width: 100%;
   }
+
+  .navbar-userInfo {
+    display: flex;
+  }
   
