@@ -1,10 +1,16 @@
 import { Link } from 'react-router-dom'
 import { auth } from "../config/Firebase-config"
 import { useAuthState } from 'react-firebase-hooks/auth'
+import { signOut } from 'firebase/auth'
 
 export const Navbar = () => {
 
     const [user] = useAuthState(auth);
+
+    const logout = async () => {
+        await signOut(auth);
+    }
+
 
     return (
         <nav className="navbar-container container">
@@ -22,7 +28,7 @@ export const Navbar = () => {
                     :
                     <div className='navbar-userInfo'>
                     <p>{user?.email}</p>
-                    <button>Log out</button>
+                    <button onClick={logout}>Log out</button>
                     </div>
                 }
 

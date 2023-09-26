@@ -1,9 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword, signOut } from 'firebase/auth'
 import { useState } from 'react';
 import { auth } from "../config/Firebase-config"
 import { useAuthState } from 'react-firebase-hooks/auth'
+import { useNavigate } from 'react-router-dom'
 
 
 
@@ -11,7 +12,7 @@ export const Register = () => {
 
     const [registerEmail, setRegisterEmail] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
-
+    const navigate = useNavigate();
     const [user] = useAuthState(auth);
 
 
@@ -23,6 +24,7 @@ export const Register = () => {
         catch (error:any) {
             console.log(error.message);
         }
+        navigate("/");
     }
 
 
@@ -39,7 +41,6 @@ export const Register = () => {
                         <input type="password" placeholder="Password..." onChange={(e) => setRegisterPassword(e.target.value)} />
                     </div>
                     <button onClick={register} className='register-button'>Register</button>
-                    <p>Logged user: {user?.email}</p>
             </div>
         </div>
     )
