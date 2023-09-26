@@ -1,31 +1,45 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { useState } from 'react';
+import { auth } from "../config/Firebase-config"
+import { useAuthState } from 'react-firebase-hooks/auth'
+
 
 
 export const Register = () => {
 
-    
-    const register = async () => {
+    const [registerEmail, setRegisterEmail] = useState("");
+    const [registerPassword, setRegisterPassword] = useState("");
 
+    const [user] = useAuthState(auth);
+
+
+    const register = async () => {
+        try {
+            const user = await createUserWithEmailAndPassword(auth, registerEmail, registerPassword);
+            console.log(user);
+        }
+        catch (error:any) {
+            console.log(error.message);
+        }
     }
 
 
     return (
         <div className="register-container">
             <div className="register">
-                <form>
                     <h1>Sign Up!</h1>
                     <div className='register-email'>
                         <FontAwesomeIcon icon={faEnvelope} className='emailIcon' />
-                        <input type="text" placeholder="Email..." />
+                        <input type="text" placeholder="Email..." onChange={(e) => setRegisterEmail(e.target.value)} />
                     </div>
                     <div className='register-password'>
                         <FontAwesomeIcon icon={faLock} className='passIcon' />
-                        <input type="password" placeholder="Password..." />
+                        <input type="password" placeholder="Password..." onChange={(e) => setRegisterPassword(e.target.value)} />
                     </div>
-                    <button className='register-button'>Register</button>
-                </form>
+                    <button onClick={register} className='register-button'>Register</button>
+                    <p>Logged user: {user?.email}</p>
             </div>
         </div>
     )
