@@ -1,9 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../config/Firebase-config';
+import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { auth, provider } from '../config/Firebase-config';
 import { useNavigate } from 'react-router-dom';
+
+
 
 
 export const Login = () => {
@@ -24,6 +26,11 @@ export const Login = () => {
         navigate("/");
     }
 
+    const signInWithGoogle = async () => {
+        const result = await signInWithPopup(auth, provider);
+        navigate("/");
+     }
+
 
 
 
@@ -38,6 +45,9 @@ return (
                     <div className='login-password'>
                         <FontAwesomeIcon icon={faLock} className='passIcon' />
                         <input type="password" placeholder="Password..." onChange={(e) => setLoginPassword(e.target.value)} />
+                    </div>
+                    <div className='login-by-google'>
+                        <button onClick={signInWithGoogle}>Sign in with Google</button>
                     </div>
                     <button onClick={login} className='login-button'>Login</button>
             </div>
