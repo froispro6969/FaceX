@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Navbar } from './components/Navbar'
 import './styles/App.css'
 import './styles/Navbar.css'
-import './styles/Register.css'
+import './styles/Register_and_Login.css'
 import { Register } from './pages/Register'
 import { Login } from './pages/Login'
 

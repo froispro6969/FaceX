@@ -39,7 +39,7 @@ return (
                         <FontAwesomeIcon icon={faLock} className='passIcon' />
                         <input type="password" placeholder="Password..." onChange={(e) => setLoginPassword(e.target.value)} />
                     </div>
-                    <button onClick={login} className='register-button'>Login</button>
+                    <button onClick={login} className='login-button'>Login</button>
             </div>
         </div>
 )
