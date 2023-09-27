@@ -4,6 +4,7 @@ import './styles/App.css'
 import './styles/Navbar.css'
 import './styles/Register.css'
 import { Register } from './pages/Register'
+import { Login } from './pages/Login'
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/register" element={<Register />}/>
+          <Route path="/login" element={<Login />}/>
         </Routes>
       </Router>
     </div>
