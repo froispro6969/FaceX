@@ -1,14 +1,16 @@
-import { addDoc, collection, getDocs } from "firebase/firestore"
-import { auth, db } from "../config/Firebase-config";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore"
+import { auth, db } from "../../config/Firebase-config";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { Post as IPost } from "./PostMain"
 
-interface Post {
-    postid: string;
-    userID: string;
-    username: string;
-    description: string;
+
+
+
+interface Props {
+    post: IPost;
 }
+
 
 interface Likes {
     userid: string;
@@ -16,29 +18,28 @@ interface Likes {
 }
 
 
-export const Post = () => {
+export const Post = (props: Props) => {
 
+    const { post } = props;
 
-
-    const [postsList, setPostsList] = useState<Post[]>();
     const [likes, setLikes] = useState<Likes[] | null>(null);
     const [user] = useAuthState(auth);
-
-    const postRef = collection(db, "Posts");
-    const likeRef = collection(db, "Likes");
-
+    const likesRef = collection(db, "Likes");
+    const likesDoc = query(likesRef, where("postID", "==",post.postid));
 
 
-    const getPosts = async () => {
-        const data = await getDocs(postRef);
-        setPostsList(data.docs.map((doc) => ({ ...doc.data(), postid: doc.id })) as Post[]);
+
+    const getLike = async () =>
+    {
+        const data = await getDocs(likesDoc);
+        setLikes(data.docs.map((doc) => ({userid: doc.data().userid, likeID: doc.id })));
     }
 
-    const addLike = async (postid: string) => {
+    const addLike = async () => {
         try {
-            const newDoc = await addDoc(likeRef, {
+            const newDoc = await addDoc(likesRef, {
                 userid: user?.uid,
-                postID: postid,
+                postID: post.postid,
             })
             if(user)
             {
@@ -52,12 +53,11 @@ export const Post = () => {
     }
 
     useEffect(() => {
-        getPosts();
+        getLike();
     }, []);
 
     return (
         <div className="Posts">
-            {postsList?.map((post) => (
                 <div>
                     <div className='title'>
                         <h1>{post.username}</h1>
@@ -65,9 +65,9 @@ export const Post = () => {
                     <div className='body'>
                         <p>{post.description}</p>
                     </div>
-                    <button onClick={() => addLike(post.postid)}>&#128077;</button>
+                    <button onClick={addLike}>&#128077;</button>
+                    {likes && <p> Likes: {likes.length}</p>}
                 </div>
-            ))}
         </div>
     )
 }
