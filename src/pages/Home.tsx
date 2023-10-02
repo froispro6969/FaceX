@@ -1,4 +1,4 @@
-import { CreatePost } from '../components/CreatePost'
+import { CreatePost } from '../components/Posts/CreatePost'
 import { Postmain } from '../components/Posts/PostMain'
 
 export const Home = () => {
