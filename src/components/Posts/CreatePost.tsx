@@ -27,7 +27,7 @@ const onCreatePost = async (data:CreatePosts) => {
         username: user?.email,
         userID:  user?.uid,
     })
-    navigate("/");
+    window.location.reload();
 }
 
 
