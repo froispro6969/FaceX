@@ -3,6 +3,9 @@ import { auth, db } from "../../config/Firebase-config";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Post as IPost } from "./PostMain"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeart as heart1 } from '@fortawesome/free-solid-svg-icons'
+import { faHeart as heart2 } from '@fortawesome/free-regular-svg-icons'
 
 
 
@@ -89,8 +92,11 @@ export const Post = (props: Props) => {
                     <div className='bodyPost'>
                         <h1>{post.username}</h1>
                         <p>{post.description}</p>
-                        <button onClick={hasUserLiked ? removeLike : addLike}> {hasUserLiked ? <>&#128078;</> : <>&#128077;</>}</button>
-                        {likes && <p> Likes: {likes.length}</p>}
+                        <div className="postOptions">
+                            <button onClick={hasUserLiked ? removeLike : addLike}> {hasUserLiked ? <FontAwesomeIcon icon={heart1} className="heart1"></FontAwesomeIcon> : <FontAwesomeIcon icon={heart2} className="heart2"></FontAwesomeIcon>}</button>
+                            {likes && <p>{likes.length}</p>}
+                        </div>
+
                     </div>
                 </div>
             </div>

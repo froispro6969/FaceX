@@ -87,6 +87,7 @@
     flex-direction: column;
     justify-content: center;
     padding-top: 10px;
+    margin-bottom: 5px;
   }
 
   .bodyPost h1 {
@@ -94,6 +95,26 @@
     margin-bottom: 5px;
   }
 
+  .postOptions {
+    margin-top: 15px;
+    display: flex;
+    gap: 5px;
+  }
+
+
+  .postOptions button {
+    border: none;
+    outline: none;
+    background-color: black;
+  }
+
+  .heart2{
+    color: gray;
+  }
+
+  .heart1 {
+    color: red;
+  }
   
 
   
