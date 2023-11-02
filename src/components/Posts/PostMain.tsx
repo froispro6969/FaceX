@@ -27,7 +27,7 @@ export const Postmain = () => {
     }, []);
 
     return (
-        <div>
+        <div className="postsList">
             {postsList?.map((post) => (
         <Post post={post}/>
         ))}

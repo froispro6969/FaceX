@@ -52,16 +52,16 @@ export const Post = (props: Props) => {
 
     const removeLike = async () => {
         try {
-            const likeToDeleteQuery = query(likesRef, where("postID","==",post.postid), where("userid","==",user?.uid));
+            const likeToDeleteQuery = query(likesRef, where("postID", "==", post.postid), where("userid", "==", user?.uid));
             const likeToDeleteData = await getDocs(likeToDeleteQuery);
-            
+
             const likeToDelete = doc(db, "Likes", likeToDeleteData.docs[0].id);
             const likeId = likeToDeleteData.docs[0].id;
 
             await deleteDoc(likeToDelete)
             {
-                if(user) {
-                    setLikes((prev) => prev && prev.filter((like)=> like.likeID !== likeId));
+                if (user) {
+                    setLikes((prev) => prev && prev.filter((like) => like.likeID !== likeId));
                 }
             }
         }
@@ -75,22 +75,25 @@ export const Post = (props: Props) => {
 
 
 
-        useEffect(() => {
-            getLike();
-        }, []);
+    useEffect(() => {
+        getLike();
+    }, []);
 
-        return (
-            <div className="Posts">
-                <div>
-                    <div className='title'>
+    return (
+        <div className="Posts">
+            <div>
+                <div className="Post">
+                    <div className="avatarPost">
+                        <img src="src\components\avatar.png" />
+                    </div>
+                    <div className='bodyPost'>
                         <h1>{post.username}</h1>
-                    </div>
-                    <div className='body'>
                         <p>{post.description}</p>
+                        <button onClick={hasUserLiked ? removeLike : addLike}> {hasUserLiked ? <>&#128078;</> : <>&#128077;</>}</button>
+                        {likes && <p> Likes: {likes.length}</p>}
                     </div>
-                    <button onClick={hasUserLiked ? removeLike:addLike}> {hasUserLiked ? <>&#128078;</> : <>&#128077;</>}</button>
-                    {likes && <p> Likes: {likes.length}</p>}
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
+}

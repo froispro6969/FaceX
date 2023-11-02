@@ -62,3 +62,38 @@
   .bn30:active {
     opacity: 0.5;
   }
+
+  .Posts {
+    border: 1px solid gray;
+  }
+
+  .postsList {
+    margin-top: 100px;
+    color: white;
+  }
+
+.Post {
+    display: flex;
+}
+
+  .avatarPost img{
+    width: 60px;
+    padding: 10px 0 0 10px;
+  }
+
+  .bodyPost {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 10px;
+  }
+
+  .bodyPost h1 {
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+  }
+
+  
+
+  
