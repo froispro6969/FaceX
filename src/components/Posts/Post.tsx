@@ -6,6 +6,8 @@ import { Post as IPost } from "./PostMain"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart as heart1 } from '@fortawesome/free-solid-svg-icons'
 import { faHeart as heart2 } from '@fortawesome/free-regular-svg-icons'
+import { faComment } from '@fortawesome/free-regular-svg-icons'
+
 
 
 
@@ -24,6 +26,7 @@ interface Likes {
 export const Post = (props: Props) => {
 
     const { post } = props;
+    const [isVisible, setIsVisible] = useState(false);
 
     const [likes, setLikes] = useState<Likes[] | null>(null);
     const [user] = useAuthState(auth);
@@ -75,6 +78,10 @@ export const Post = (props: Props) => {
 
     const hasUserLiked = likes?.find((like) => like.userid === user?.uid);
 
+    const handleCommentClick = () => {
+        setIsVisible(!isVisible);
+    };
+
 
 
 
@@ -95,6 +102,17 @@ export const Post = (props: Props) => {
                         <div className="postOptions">
                             <button onClick={hasUserLiked ? removeLike : addLike}> {hasUserLiked ? <FontAwesomeIcon icon={heart1} className="heart1"></FontAwesomeIcon> : <FontAwesomeIcon icon={heart2} className="heart2"></FontAwesomeIcon>}</button>
                             {likes && <p>{likes.length}</p>}
+                            <button onClick={handleCommentClick}><FontAwesomeIcon icon={faComment} className="comment"></FontAwesomeIcon></button>
+                            {isVisible && (
+                                <div className="popup">
+                                    <div className="popup-content">
+                                        <input
+                                            type="text"
+                                        />
+                                        <button className="popupBtn" onClick={handleCommentClick}>WYLACZ</button>
+                                    </div>
+                                </div>
+                            )}
                         </div>
 
                     </div>
