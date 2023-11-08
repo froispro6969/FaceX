@@ -26,7 +26,7 @@ interface Likes {
 export const Post = (props: Props) => {
 
     const { post } = props;
-    const [isVisible, setIsVisible] = useState(false);
+    const [isVisibleComments, setIsVisibleComments] = useState(false);
 
     const [likes, setLikes] = useState<Likes[] | null>(null);
     const [user] = useAuthState(auth);
@@ -79,7 +79,7 @@ export const Post = (props: Props) => {
     const hasUserLiked = likes?.find((like) => like.userid === user?.uid);
 
     const handleCommentClick = () => {
-        setIsVisible(!isVisible);
+        setIsVisibleComments(!isVisibleComments);
     };
 
 
@@ -93,23 +93,41 @@ export const Post = (props: Props) => {
         <div className="Posts">
             <div>
                 <div className="Post">
-                    <div className="avatarPost">
-                        <img src="src\components\avatar.png" />
+                    <div>
+                        <img className="avatar" src="src\components\avatar.png" />
                     </div>
                     <div className='bodyPost'>
-                        <h1>{post.username}</h1>
-                        <p>{post.description}</p>
+                        <h1 className="post-username">{post.username}</h1>
+                        <p className="post-description">{post.description}</p>
                         <div className="postOptions">
                             <button onClick={hasUserLiked ? removeLike : addLike}> {hasUserLiked ? <FontAwesomeIcon icon={heart1} className="heart1"></FontAwesomeIcon> : <FontAwesomeIcon icon={heart2} className="heart2"></FontAwesomeIcon>}</button>
                             {likes && <p>{likes.length}</p>}
                             <button onClick={handleCommentClick}><FontAwesomeIcon icon={faComment} className="comment"></FontAwesomeIcon></button>
-                            {isVisible && (
+                            {isVisibleComments && (
                                 <div className="popup">
                                     <div className="popup-content">
-                                        <input
-                                            type="text"
-                                        />
-                                        <button className="popupBtn" onClick={handleCommentClick}>WYLACZ</button>
+                                        <div className="popup-content-post">
+                                            <div className="Post">
+                                                <div>
+                                                    <img className="avatar" src="src\components\avatar.png" />
+                                                </div>
+                                                <div className="bodyPost">
+                                                    <h1 className="post-username">{post.username}</h1>
+                                                    <p className="post-description">{post.description}</p>
+                                                    <div className="postOptions">
+                                                        <button onClick={hasUserLiked ? removeLike : addLike}> {hasUserLiked ? <FontAwesomeIcon icon={heart1} className="heart1"></FontAwesomeIcon> : <FontAwesomeIcon icon={heart2} className="heart2"></FontAwesomeIcon>}</button>
+                                                        {likes && <p>{likes.length}</p>}
+                                                        <button><FontAwesomeIcon icon={faComment} className="comment"></FontAwesomeIcon></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="post-comment">
+                                            <img className="avatar" src="src\components\avatar.png" alt="" />
+                                            <textarea placeholder="Post your reply" ></textarea>
+                                            <button className="popupBtn" onClick={handleCommentClick}>WYLACZ</button>
+                                        </div>
+
                                     </div>
                                 </div>
                             )}
