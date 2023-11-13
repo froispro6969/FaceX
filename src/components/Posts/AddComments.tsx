@@ -29,7 +29,7 @@ export const AddComments = (props: Props) => {
 
     const addComment = async (data: Comments) => {
         try {
-            const newDoc = await addDoc(commentsRef, {
+            await addDoc(commentsRef, {
                 userID: user?.uid,
                 postID: post.postid,
                 ...data,
