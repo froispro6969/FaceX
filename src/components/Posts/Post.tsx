@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart as heart1 } from '@fortawesome/free-solid-svg-icons'
 import { faHeart as heart2 } from '@fortawesome/free-regular-svg-icons'
 import { faComment } from '@fortawesome/free-regular-svg-icons'
+import { AddComments } from './AddComments'
 
 
 
@@ -23,6 +24,7 @@ interface Likes {
 }
 
 
+
 export const Post = (props: Props) => {
 
     const { post } = props;
@@ -32,6 +34,7 @@ export const Post = (props: Props) => {
     const [user] = useAuthState(auth);
     const likesRef = collection(db, "Likes");
     const likesDoc = query(likesRef, where("postID", "==", post.postid));
+    
 
 
 
@@ -83,8 +86,6 @@ export const Post = (props: Props) => {
     };
 
 
-
-
     useEffect(() => {
         getLike();
     }, []);
@@ -106,6 +107,7 @@ export const Post = (props: Props) => {
                             {isVisibleComments && (
                                 <div className="popup">
                                     <div className="popup-content">
+                                    <button className="popupBtn" onClick={handleCommentClick}>WYLACZ</button>
                                         <div className="popup-content-post">
                                             <div className="Post">
                                                 <div>
@@ -122,10 +124,9 @@ export const Post = (props: Props) => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="post-comment">
-                                            <img className="avatar" src="src\components\avatar.png" alt="" />
-                                            <textarea placeholder="Post your reply" ></textarea>
-                                            <button className="popupBtn" onClick={handleCommentClick}>WYLACZ</button>
+                                        <AddComments post={post}></AddComments>
+                                        <div>
+
                                         </div>
 
                                     </div>
