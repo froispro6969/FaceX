@@ -8,6 +8,7 @@ import { faHeart as heart1 } from '@fortawesome/free-solid-svg-icons'
 import { faHeart as heart2 } from '@fortawesome/free-regular-svg-icons'
 import { faComment } from '@fortawesome/free-regular-svg-icons'
 import { AddComments } from './AddComments'
+import { CommentsMain } from "./CommentsMain";
 
 
 
@@ -125,9 +126,7 @@ export const Post = (props: Props) => {
                                             </div>
                                         </div>
                                         <AddComments post={post}></AddComments>
-                                        <div>
-
-                                        </div>
+                                        <CommentsMain></CommentsMain>
 
                                     </div>
                                 </div>

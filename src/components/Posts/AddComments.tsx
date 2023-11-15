@@ -4,13 +4,11 @@ import { auth, db } from "../../config/Firebase-config";
 import { useForm } from 'react-hook-form'
 import { useAuthState } from "react-firebase-hooks/auth";
 
-
-
 interface Props {
     post: IPost;
 }
 
-interface Comments {
+interface CreateComments {
     description: string;
 }
 
@@ -22,12 +20,12 @@ export const AddComments = (props: Props) => {
     const [ user ] = useAuthState(auth)
     const commentsRef = collection(db, "Comments");
 
-    const { register, handleSubmit } = useForm<Comments>({
+    const { register, handleSubmit } = useForm<CreateComments>({
 
     });
 
 
-    const addComment = async (data: Comments) => {
+    const addComment = async (data: CreateComments) => {
         try {
             await addDoc(commentsRef, {
                 userID: user?.uid,
