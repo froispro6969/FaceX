@@ -1,7 +1,8 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../config/Firebase-config";
 import { Comments } from './Comments'
+import { Post as Ipost } from './PostMain' 
 
 export interface Comments {
     description: string;
@@ -10,15 +11,22 @@ export interface Comments {
     postID: string;
 }
 
-export const CommentsMain = () => {
+interface Props {
+    post: Ipost;
+}
+
+export const CommentsMain = (props: Props) => {
 
     const [commentsList,setCommentsList] = useState<Comments[]>();
+
     const commentsRef = collection(db,"Comments");
+    const { post } = props;
 
     const getComments = async () => {
         try{
-            const data = await getDocs(commentsRef);
-            setCommentsList(data.docs.map((doc) => ({...doc.data(), commentID: doc.id})) as Comments[]);
+            const commentsQuery = query(commentsRef,where("postID", "==", post.postid));
+            const data2 = await getDocs(commentsQuery);
+            setCommentsList(data2.docs.map((doc) => ({...doc.data(), commentID: doc.id})) as Comments[]);
         }
         catch(err)
         {

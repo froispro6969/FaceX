@@ -126,7 +126,7 @@ export const Post = (props: Props) => {
                                             </div>
                                         </div>
                                         <AddComments post={post}></AddComments>
-                                        <CommentsMain></CommentsMain>
+                                        <CommentsMain post={post}></CommentsMain>
 
                                     </div>
                                 </div>
