@@ -9,6 +9,7 @@ export interface Comments {
     commentID: string;
     userID: string;
     postID: string;
+    username: string;
 }
 
 interface Props {
@@ -40,6 +41,7 @@ export const CommentsMain = (props: Props) => {
 
     return (
         <div className="commentsList">
+            <h1 className="comments-title">COMMENTS</h1>
             {commentsList?.map((comment) => 
             (
                 <Comments comments={comment}></Comments>

@@ -30,6 +30,7 @@ export const AddComments = (props: Props) => {
             await addDoc(commentsRef, {
                 userID: user?.uid,
                 postID: post.postid,
+                username: post.username,
                 ...data,
             })
         }
