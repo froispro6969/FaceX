@@ -1,24 +1,40 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faLock, faUser } from '@fortawesome/free-solid-svg-icons'
 import { createUserWithEmailAndPassword} from 'firebase/auth'
 import { useState } from 'react';
-import { auth } from "../config/Firebase-config"
+import { auth, db } from "../config/Firebase-config"
 import { useNavigate } from 'react-router-dom'
+import { addDoc, collection } from 'firebase/firestore';
+import { useForm } from 'react-hook-form';
 
 
+interface Users {
+    email: string;
+    username: string;
+}
 
 export const Register = () => {
 
+    const [registerUsername, setRegisterUsername] = useState("");
     const [registerEmail, setRegisterEmail] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
     const navigate = useNavigate();
     
+    const userRef = collection(db,"Users");
 
 
-    const register = async () => {
+    const { register, handleSubmit } = useForm<Users>({
+
+    });
+
+
+
+    const registerUser = async (data: Users) => {
         try {
             const user = await createUserWithEmailAndPassword(auth, registerEmail, registerPassword);
-            console.log(user);
+            addDoc(userRef, {
+                ...data,
+            })
         }
         catch (error:any) {
             console.log(error.message);
@@ -28,19 +44,25 @@ export const Register = () => {
 
 
     return (
+        <form onSubmit={handleSubmit(registerUser)}>
         <div className="register-container">
             <div className="register">
                     <h1>Sign Up!</h1>
+                    <div className='register-username'>
+                        <FontAwesomeIcon icon={faUser} className='usernameIcon' />
+                        <input type="text" placeholder="Username..." {...register("username")} onChange={(e) => setRegisterUsername(e.target.value)} />
+                    </div>
                     <div className='register-email'>
                         <FontAwesomeIcon icon={faEnvelope} className='emailIcon' />
-                        <input type="text" placeholder="Email..." onChange={(e) => setRegisterEmail(e.target.value)} />
+                        <input type="text" placeholder="Email..." {...register("email")} onChange={(e) => setRegisterEmail(e.target.value)} />
                     </div>
                     <div className='register-password'>
                         <FontAwesomeIcon icon={faLock} className='passIcon' />
                         <input type="password" placeholder="Password..." onChange={(e) => setRegisterPassword(e.target.value)} />
                     </div>
-                    <button onClick={register} className='register-button'>Register</button>
+                    <input type="submit" className='register-button' />
             </div>
         </div>
+        </form>
     )
 }

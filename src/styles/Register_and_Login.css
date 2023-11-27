@@ -30,13 +30,13 @@
     font-size: 1.2rem;
 }
 
-.register-email, .register-password, .login-email, .login-password{
+.register-email, .register-password, .login-email, .login-password, .register-username{
     position: relative;
     display: flex;
     align-items: center;
 }
 
-.emailIcon, .passIcon {
+.emailIcon, .passIcon, .usernameIcon {
     position: absolute;
     left: 10px;
 }
