@@ -8,9 +8,10 @@ import { addDoc, collection } from 'firebase/firestore';
 import { useForm } from 'react-hook-form';
 
 
-interface Users {
+interface createUsers {
     email: string;
     username: string;
+    userID: string;
 }
 
 export const Register = () => {
@@ -23,17 +24,18 @@ export const Register = () => {
     const userRef = collection(db,"Users");
 
 
-    const { register, handleSubmit } = useForm<Users>({
+    const { register, handleSubmit } = useForm<createUsers>({
 
     });
 
 
 
-    const registerUser = async (data: Users) => {
+    const registerUser = async (data: createUsers) => {
         try {
-            const user = await createUserWithEmailAndPassword(auth, registerEmail, registerPassword);
+            const newUser = await createUserWithEmailAndPassword(auth, registerEmail, registerPassword);
             addDoc(userRef, {
                 ...data,
+                userID: newUser.user.uid,
             })
         }
         catch (error:any) {
