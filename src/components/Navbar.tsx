@@ -18,28 +18,36 @@ export const Navbar = () => {
     const [user] = useAuthState(auth);
     const userRef = collection(db,"Users");
     const [userList, setUserList] = useState<Users[]>([]);
+    const [userUid, setUserUid] = useState<string | null>(null);
 
     const logout = async () => {
         await signOut(auth);
     }
 
-
-    const getUsers = async () => {
-        try{
-            const usersQuery = query(userRef, where("userID","==","jwcxtuDOuRd05kddMK8rSMGZ4wl2"));
-            const data = await getDocs(usersQuery);
-            setUserList(data.docs.map((doc) => ({ ...doc.data()})) as Users[]);
-            console.log(userList)
+    useEffect(() => {
+        if (user) {
+            setUserUid(user.uid); 
         }
-        catch(err)
-        {
-            console.log(err)
-        }
-    }
+    }, [user]);
 
     useEffect(() => {
-        getUsers();
-    }, []);
+        const getUsers = async () => {
+            try {
+                if (userUid) {
+                    const usersQuery = query(userRef, where("userID", "==", userUid)); // Filter users by logged-in user's ID
+                    const data = await getDocs(usersQuery);
+                    setUserList(data.docs.map((doc) => ({ ...doc.data(), userID: doc.id })) as Users[]);
+                } else {
+                    console.log("User UID is not available");
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        getUsers(); 
+
+    }, [userUid]); // Fetch users when userUid is available
 
     return (
         <nav className="navbar-container container">
