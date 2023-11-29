@@ -28,9 +28,13 @@ export const Postmain = () => {
 
     return (
         <div className="postsList">
-            {postsList?.map((post) => (
-        <Post post={post}/>
-        ))}
+            {   
+                postsList?.map((post) => (
+                    <div key={post.postid}>
+                        <Post post={post} />
+                    </div>
+                    
+                ))}
         </div>
     )
 }
