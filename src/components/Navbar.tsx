@@ -2,52 +2,18 @@ import { Link } from 'react-router-dom'
 import { auth, db } from "../config/Firebase-config"
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { signOut } from 'firebase/auth'
-import { collection, getDocs, query, where } from 'firebase/firestore'
-import { useEffect, useState } from 'react'
+import { useUserList } from "./UsersProvider";
 
-interface Users {
-    email: string;
-    username: string;
-    userID: string;
-}
 
 
 
 export const Navbar = () => {
 
     const [user] = useAuthState(auth);
-    const userRef = collection(db,"Users");
-    const [userList, setUserList] = useState<Users[]>([]);
-    const [userUid, setUserUid] = useState<string | null>(null);
-
+    const userList = useUserList();
     const logout = async () => {
         await signOut(auth);
     }
-
-    useEffect(() => {
-        if (user) {
-            setUserUid(user.uid); 
-        }
-    }, [user]);
-
-    useEffect(() => {
-        const getUsers = async () => {
-            try {
-                if (userUid) {
-                    const usersQuery = query(userRef, where("userID", "==", userUid)); // Filter users by logged-in user's ID
-                    const data = await getDocs(usersQuery);
-                    setUserList(data.docs.map((doc) => ({ ...doc.data(), userID: doc.id })) as Users[]);
-                } else {
-                    console.log("User UID is not available");
-                }
-            } catch (err) {
-                console.log(err);
-            }
-        };
-
-        getUsers(); 
-
-    }, [userUid]); // Fetch users when userUid is available
 
     return (
         <nav className="navbar-container container">
@@ -64,8 +30,12 @@ export const Navbar = () => {
                     </div>
                     :
                     <div className='navbar-userInfo'>
-                    <p>{userList[0]?.username}</p>
-                    <button onClick={logout}>Log out</button>
+                        <div>{userList.map((user) => (
+                            <div key={user.userID}>
+                                <p>{user.username}</p>
+                            </div>
+                        ))}</div>
+                        <button onClick={logout}>Log out</button>
                     </div>
                 }
 
