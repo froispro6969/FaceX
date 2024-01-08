@@ -87,6 +87,7 @@ export const Post = (props: Props) => {
     };
 
 
+
     useEffect(() => {
         getLike();
     }, []);

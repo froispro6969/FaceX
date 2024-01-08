@@ -4,6 +4,7 @@ import { auth, db } from "../../config/Firebase-config";
 import { useForm } from 'react-hook-form'
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useUserList } from "../UsersProvider";
+import { currentDate } from "./currentDate";
 
 interface Props {
     post: IPost;
@@ -35,6 +36,7 @@ export const AddComments = (props: Props) => {
                 postID: post.postid,
                 username: user.username,
                 email: user.email,
+                createdAt: currentDate(),
                 ...data,
             })
         }

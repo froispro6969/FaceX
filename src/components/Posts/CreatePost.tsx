@@ -3,6 +3,7 @@ import { auth, db } from '../../config/Firebase-config';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { useUserList } from '../UsersProvider';
+import { currentDate } from './currentDate'
 
 interface CreatePosts {
     description: string;
@@ -22,6 +23,7 @@ export const CreatePost = () => {
 
 
     const onCreatePost = async (data: CreatePosts) => {
+
         for (const user of userList) {
             try {
                 await addDoc(postRef, {
@@ -29,6 +31,7 @@ export const CreatePost = () => {
                     username: user.username,
                     email: user.email,
                     userID: user.userID,
+                    createdAt: currentDate(),
                 })
             }
             catch (err) {
