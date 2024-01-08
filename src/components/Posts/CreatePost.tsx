@@ -2,6 +2,7 @@ import { addDoc, collection } from 'firebase/firestore'
 import { auth, db } from '../../config/Firebase-config';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
+import { useUserList } from '../UsersProvider';
 
 interface CreatePosts {
     description: string;
@@ -11,6 +12,7 @@ interface CreatePosts {
 export const CreatePost = () => {
 
     const [user] = useAuthState(auth);
+    const userList = useUserList();
     const postRef = collection(db, "Posts");
 
 
@@ -20,11 +22,20 @@ export const CreatePost = () => {
 
 
     const onCreatePost = async (data: CreatePosts) => {
-        await addDoc(postRef, {
-            ...data,
-            username: user?.email,
-            userID: user?.uid,
-        })
+        for (const user of userList) {
+            try {
+                await addDoc(postRef, {
+                    ...data,
+                    username: user.username,
+                    email: user.email,
+                    userID: user.userID,
+                })
+            }
+            catch (err) {
+                console.log(err)
+            }
+        }
+
         window.location.reload();
     }
 

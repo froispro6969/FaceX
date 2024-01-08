@@ -3,6 +3,7 @@ import { Post as IPost } from "./PostMain"
 import { auth, db } from "../../config/Firebase-config";
 import { useForm } from 'react-hook-form'
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useUserList } from "../UsersProvider";
 
 interface Props {
     post: IPost;
@@ -18,6 +19,7 @@ export const AddComments = (props: Props) => {
 
     const { post } = props
     const [ user ] = useAuthState(auth)
+    const userList = useUserList();
     const commentsRef = collection(db, "Comments");
 
     const { register, handleSubmit } = useForm<CreateComments>({
@@ -26,18 +28,20 @@ export const AddComments = (props: Props) => {
 
 
     const addComment = async (data: CreateComments) => {
+        for (const user of userList) {
         try {
             await addDoc(commentsRef, {
-                userID: user?.uid,
+                userID: user.userID,
                 postID: post.postid,
-                username: user?.email,
+                username: user.username,
+                email: user.email,
                 ...data,
             })
         }
         catch (err) {
             console.log(err);
         }
-    }
+    }}
 
 
 
