@@ -35,7 +35,7 @@ export const Post = (props: Props) => {
     const [user] = useAuthState(auth);
     const likesRef = collection(db, "Likes");
     const likesDoc = query(likesRef, where("postID", "==", post.postid));
-    
+
 
 
 
@@ -100,7 +100,11 @@ export const Post = (props: Props) => {
                         <img className="avatar" src="src\components\avatar.png" />
                     </div>
                     <div className='bodyPost'>
-                        <h1 className="post-username">{post.username}</h1>
+                        <div className="post-info">
+                            <h1 className="post-username">{post.username}</h1>
+                            <h5 className="post-email">@{post.email}</h5>
+                            <h5 className="post-date">·{post.createdAt}</h5>
+                        </div>
                         <p className="post-description">{post.description}</p>
                         <div className="postOptions">
                             <button onClick={hasUserLiked ? removeLike : addLike}> {hasUserLiked ? <FontAwesomeIcon icon={heart1} className="heart1"></FontAwesomeIcon> : <FontAwesomeIcon icon={heart2} className="heart2"></FontAwesomeIcon>}</button>
@@ -109,7 +113,7 @@ export const Post = (props: Props) => {
                             {isVisibleComments && (
                                 <div className="popup">
                                     <div className="popup-content">
-                                    <button className="popupBtn" onClick={handleCommentClick}>WYLACZ</button>
+                                        <button className="popupBtn" onClick={handleCommentClick}>WYLACZ</button>
                                         <div className="popup-content-post">
                                             <div className="Post">
                                                 <div>

@@ -7,7 +7,9 @@ export interface Post {
     postid: string;
     userID: string;
     username: string;
+    email: string;
     description: string;
+    createdAt: string;
 }
 
 

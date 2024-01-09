@@ -76,12 +76,24 @@
     display: flex;
 }
 
+.post-info {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.post-email,.post-date {
+  color: gray;
+}
   .avatar{
     width: 60px;
     padding: 10px 0 0 10px;
   }
 
+
   .bodyPost {
+    width: 100%;
     margin-left: 10px;
     display: flex;
     flex-direction: column;
