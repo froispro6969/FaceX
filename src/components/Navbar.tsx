@@ -30,11 +30,13 @@ export const Navbar = () => {
                     </div>
                     :
                     <div className='navbar-userInfo'>
-                        <div>{userList.map((user) => (
-                            <div key={user.userID}>
-                                <p>{user.username}</p>
+                        <div>{userList.map((users) => (
+                            <div key={users.userID}>
+                                <p>{users.username}</p>
                             </div>
-                        ))}</div>
+                        ))}
+                        </div>
+
                         <button onClick={logout}>Log out</button>
                     </div>
                 }
