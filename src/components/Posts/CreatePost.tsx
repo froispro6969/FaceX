@@ -47,7 +47,7 @@ export const CreatePost = () => {
     return (
         <form onSubmit={handleSubmit(onCreatePost)}>
             <div className='makePost'>
-                <img src={user?.photoURL || ""} />
+                <img src={user?.photoURL || "src/components/avatar.png"} />
                 <textarea placeholder="What u doing..." {...register("description")}></textarea>
                 <input className='bn30' role='button' type="submit" />
             </div>
