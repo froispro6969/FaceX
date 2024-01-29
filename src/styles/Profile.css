@@ -9,6 +9,7 @@
     flex-direction: column;
     align-items: center;
     border: 1px solid red;
+    padding: 60px 0;
 }
 
 .profile-info {
@@ -19,7 +20,6 @@
 }
 
 .profile-avatar img{
-    padding-top: 30px;
     width: 200px;
 }
 

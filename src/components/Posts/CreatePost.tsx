@@ -1,9 +1,10 @@
-import { addDoc, collection } from 'firebase/firestore'
+import { addDoc, collection, doc, query, updateDoc, where } from 'firebase/firestore'
 import { auth, db } from '../../config/Firebase-config';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { useUserList } from '../UsersProvider';
 import { currentDate } from './currentDate'
+
 
 interface CreatePosts {
     description: string;
@@ -15,7 +16,8 @@ export const CreatePost = () => {
     const [user] = useAuthState(auth);
     const userList = useUserList();
     const postRef = collection(db, "Posts");
-
+   
+   
 
     const { register, handleSubmit } = useForm<CreatePosts>({
 
@@ -33,6 +35,9 @@ export const CreatePost = () => {
                     userID: user.userID,
                     createdAt: currentDate(),
                 })
+                await updateDoc(doc(db, "Users", "P7MeGH70V6shMSSr3anc"), {
+                    posts: 1,
+                  });
             }
             catch (err) {
                 console.log(err)
@@ -42,6 +47,8 @@ export const CreatePost = () => {
         window.location.reload();
     }
 
+    
+
 
 
     return (
@@ -49,7 +56,7 @@ export const CreatePost = () => {
             <div className='makePost'>
                 <img src={user?.photoURL || "src/components/avatar.png"} />
                 <textarea placeholder="What u doing..." {...register("description")}></textarea>
-                <input className='bn30' role='button' type="submit" />
+                <input className='bn30' role='button' type="submit"/>
             </div>
         </form>
     )

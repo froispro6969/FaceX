@@ -17,8 +17,8 @@ export const Profile = () => {
                             <h2 className="profile-email">@{users.email}</h2>
                             <h2>20-05-2004</h2>
                             <h2>Warsaw</h2>
-                            <h2>5 posts</h2>
-                            <h2>20 likes</h2>
+                            <h2>{users.posts} posts</h2>
+                            <h2>{users.followers} followers</h2>
                         </div>
                     ))}
                 </div>
