@@ -97,7 +97,7 @@ export const Post = (props: Props) => {
             <div>
                 <div className="Post">
                     <div>
-                        <img className="avatar" src="src\components\avatar.png" />
+                        <img className="avatar" src="src/components/avatar.png"/>
                     </div>
                     <div className='bodyPost'>
                         <div className="post-info">

@@ -1,0 +1,33 @@
+.profile-container {
+    padding-top: 60px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.profile-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid red;
+}
+
+.profile-info {
+    width: 100%;
+}
+.profile-info h1 {
+    text-align: center;
+}
+
+.profile-avatar img{
+    padding-top: 30px;
+    width: 200px;
+}
+
+.profile-info h2{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.profile-email {
+    color: gray;
+}
