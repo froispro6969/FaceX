@@ -19,7 +19,6 @@ interface CreateComments {
 export const AddComments = (props: Props) => {
 
     const { post } = props
-    const [ user ] = useAuthState(auth)
     const userList = useUserList();
     const commentsRef = collection(db, "Comments");
 
@@ -39,6 +38,7 @@ export const AddComments = (props: Props) => {
                 createdAt: currentDate(),
                 ...data,
             })
+            window.location.reload();
         }
         catch (err) {
             console.log(err);

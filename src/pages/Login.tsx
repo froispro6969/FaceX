@@ -40,9 +40,11 @@ export const Login = () => {
                 userID: result.user.uid,
             })
             navigate("/");
+            location.reload();
         }
         else {
             navigate("/");
+            location.reload();
         }
     }
 
