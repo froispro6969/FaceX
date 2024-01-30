@@ -14,6 +14,7 @@ interface createUsers {
     userID: string;
     posts: number;
     followers: number;
+    profilePicture: string;
 }
 
 export const Register = () => {
@@ -40,6 +41,7 @@ export const Register = () => {
                 userID: newUser.user.uid,
                 posts: 0,
                 followers: 0,
+                profilePicture: "src/components/avatar.png",
             })
         }
         catch (error:any) {

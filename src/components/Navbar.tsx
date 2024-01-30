@@ -33,6 +33,7 @@ export const Navbar = () => {
                         <div>{userList.map((users) => (
                             <div key={users.userID}>
                                 <p>{users.username}</p>
+                                <img className='avatar' src={users.profilePicture}/>
                             </div>
                         ))}
                         </div>

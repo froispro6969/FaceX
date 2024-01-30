@@ -38,13 +38,16 @@ export const Login = () => {
                 email: result.user.email,
                 username: result.user.displayName,
                 userID: result.user.uid,
+                profilePicture: result.user.photoURL,
             })
             navigate("/");
-            location.reload();
+            setTimeout(function() {
+                location.reload();
+            }, 1000);
+            
         }
         else {
             navigate("/");
-            location.reload();
         }
     }
 

@@ -10,6 +10,7 @@ interface Users {
     userID: string;
     posts: number;
     followers: number;
+    profilePicture: string;
 }
 
 const UserListContext = createContext<Users[]>([]);

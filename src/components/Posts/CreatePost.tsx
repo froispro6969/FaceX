@@ -33,11 +33,9 @@ export const CreatePost = () => {
                     username: user.username,
                     email: user.email,
                     userID: user.userID,
+                    postPicture: user.profilePicture,
                     createdAt: currentDate(),
                 })
-                await updateDoc(doc(db, "Users", "P7MeGH70V6shMSSr3anc"), {
-                    posts: 1,
-                  });
             }
             catch (err) {
                 console.log(err)
@@ -54,7 +52,7 @@ export const CreatePost = () => {
     return (
         <form onSubmit={handleSubmit(onCreatePost)}>
             <div className='makePost'>
-                <img src={user?.photoURL || "src/components/avatar.png"} />
+            <img src={userList.length > 0 ? userList[0].profilePicture || "" : ""} />
                 <textarea placeholder="What u doing..." {...register("description")}></textarea>
                 <input className='bn30' role='button' type="submit"/>
             </div>

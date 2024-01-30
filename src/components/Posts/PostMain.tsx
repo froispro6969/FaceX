@@ -10,6 +10,7 @@ export interface Post {
     email: string;
     description: string;
     createdAt: string;
+    postPicture: string;
 }
 
 

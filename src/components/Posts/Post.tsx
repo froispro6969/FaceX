@@ -97,7 +97,7 @@ export const Post = (props: Props) => {
             <div>
                 <div className="Post">
                     <div>
-                        <img className="avatar" src="src/components/avatar.png"/>
+                        <img className="avatar" src={post.postPicture} />
                     </div>
                     <div className='bodyPost'>
                         <div className="post-info">
@@ -117,7 +117,7 @@ export const Post = (props: Props) => {
                                         <div className="popup-content-post">
                                             <div className="Post">
                                                 <div>
-                                                    <img className="avatar" src="src\components\avatar.png" />
+                                                    <img className="avatar" src={post.postPicture} />
                                                 </div>
                                                 <div className="bodyPost">
                                                     <h1 className="post-username">{post.username}</h1>
