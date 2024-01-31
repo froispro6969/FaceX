@@ -12,8 +12,6 @@ interface createUsers {
     email: string;
     username: string;
     userID: string;
-    posts: number;
-    followers: number;
     profilePicture: string;
 }
 
@@ -39,8 +37,6 @@ export const Register = () => {
             addDoc(userRef, {
                 ...data,
                 userID: newUser.user.uid,
-                posts: 0,
-                followers: 0,
                 profilePicture: "src/components/avatar.png",
             })
         }

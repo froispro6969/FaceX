@@ -1,14 +1,15 @@
 .profile-container {
     padding-top: 60px;
-    max-width: 500px;
+    max-width: 1200px;
     margin: 0 auto;
+    display: flex;
+    border: 1px solid red;
 }
 
-.profile-page {
+.profile-page-left {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid red;
     padding: 60px 0;
 }
 
@@ -30,4 +31,11 @@
 
 .profile-email {
     color: gray;
+}
+
+.profile-page-right{
+    flex: 1;
+}
+.profile-page-right h1 {
+    text-align: center;
 }

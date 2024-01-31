@@ -8,8 +8,6 @@ interface Users {
     email: string;
     username: string;
     userID: string;
-    posts: number;
-    followers: number;
     profilePicture: string;
 }
 
