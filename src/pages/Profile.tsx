@@ -1,8 +1,10 @@
+import { ProfilePostsMain } from "../components/Posts/ProfilePostsMain";
 import { useUserList } from "../components/UsersProvider";
 
 export const Profile = () => {
 
     const userList = useUserList();
+
 
     return (
         <div className="profile-container">
@@ -22,7 +24,8 @@ export const Profile = () => {
                 </div>
             </div>
             <div className="profile-page-right">
-                <h1>Your Comments</h1>
+                <h1 className="profile-page-right-title">Your Posts</h1>
+                <ProfilePostsMain></ProfilePostsMain>
             </div>
         </div>
     )

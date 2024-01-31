@@ -33,9 +33,15 @@
     color: gray;
 }
 
+.profile-posts{
+    display: flex;
+    margin-top: 25px;
+    margin-left: 100px;
+}
+
 .profile-page-right{
     flex: 1;
 }
-.profile-page-right h1 {
+.profile-page-right-title {
     text-align: center;
 }
