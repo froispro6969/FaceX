@@ -17,7 +17,6 @@ interface Posts {
 export const ProfilePostsMain = () => {
 
     const [postsList,setPostsList] = useState<Posts[]>();
-    const [user] = useAuthState(auth);
     const userList = useUserList();
     const postsRef = collection(db,"Posts");
     const userID = userList.length > 0 ? userList[0].userID || "" : ""
@@ -44,7 +43,7 @@ export const ProfilePostsMain = () => {
             (
                 <div className="profile-posts">
                 <div>
-                    <img className="avatar" src="src\components\avatar.png" alt="" />
+                    <img className="avatar" src={userList.length > 0 ? userList[0].profilePicture || "" : ""} alt="" />
                 </div>
                 <div className="bodyPost">
                     <div className="post-info">
