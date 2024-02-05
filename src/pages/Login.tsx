@@ -16,22 +16,24 @@ export const Login = () => {
     const [loginPassword, setLoginPassword] = useState("");
     const navigate = useNavigate();
     const userRef = collection(db, "Users");
+    const [isLoginValid, setIsLoginValid] = useState(true);
 
     const login = async () => {
         try {
             const user = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
-            console.log(user);
+            navigate("/");
         }
         catch (error: any) {
-            console.log(error.message);
+            setIsLoginValid(false);
         }
-        navigate("/");
+        
     }
 
     const signInWithGoogle = async () => {
         const result = await signInWithPopup(auth, provider);
         const q = query(userRef, where("email", "==", result.user.email));
         const isUserInDatabase = await getDocs(q);
+        
 
         if (isUserInDatabase.empty) {
             addDoc(userRef, {
@@ -70,6 +72,7 @@ export const Login = () => {
                 <div className='login-by-google'>
                     <button onClick={signInWithGoogle}>Sign in with Google</button>
                 </div>
+                <p>{isLoginValid ? "": <p style={{color:"red"}}>Your login or password are invalid!</p>}</p>
                 <button onClick={login} className='login-button'>Login</button>
             </div>
         </div>
