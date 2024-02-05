@@ -3,7 +3,8 @@ import { auth, db } from "../config/Firebase-config"
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { signOut } from 'firebase/auth'
 import { useUserList } from "./UsersProvider";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faUser } from '@fortawesome/free-solid-svg-icons'
 
 
 
@@ -29,7 +30,10 @@ export const Navbar = () => {
                         <Link to={"/register"}>Create account</Link>
                     </div>
                     :
+                    
                     <div className='navbar-userInfo'>
+                        <FontAwesomeIcon icon={faBars} className='faBars' />
+                        <FontAwesomeIcon icon={faUser} className='faUser' />
                         <div>{userList.map((users) => (
                             <div key={users.userID}>
                                 <p>{users.username}</p>

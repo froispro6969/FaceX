@@ -72,7 +72,7 @@ export const Login = () => {
                 <div className='login-by-google'>
                     <button onClick={signInWithGoogle}>Sign in with Google</button>
                 </div>
-                <p>{isLoginValid ? "": <p style={{color:"red"}}>Your login or password are invalid!</p>}</p>
+                {!isLoginValid && <div><p style={{color:"red"}}>Your login or password are invalid!</p></div>}
                 <button onClick={login} className='login-button'>Login</button>
             </div>
         </div>
